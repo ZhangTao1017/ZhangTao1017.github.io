@@ -104,7 +104,7 @@ theme: kira
 deploy:
   type: git
   repo: git@github.com:zhangtao101/zhangtao101.github.io.git
-  branch: master
+  branch: branch
   name: zhangtao101
   email: 1564173857@qq.com
   ignore_hidden: false
