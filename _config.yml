@@ -104,5 +104,5 @@ theme: kira
 deploy:
   type: 'git'
   repo:
-    github: https://github.com/ZhangTao1017/ZhangTao1017.github.io
+    github: https://github.com/zhangtao101/zhangtao101.github.io
   branch: master
