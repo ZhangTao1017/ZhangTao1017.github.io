@@ -13,7 +13,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://zhangtao1017.github.io/zhangtao1017.github.io
+url: https://zhangtao101.github.io/zhangtao101.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -102,7 +102,10 @@ theme: kira
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: 'git'
-  repo:
-    github: https://github.com/zhangtao101/zhangtao101.github.io
+  type: git
+  repo: git@github.com:zhangtao101/zhangtao101.github.io.git
   branch: master
+  name: zhangtao101
+  email: 1564173857@qq.com
+  ignore_hidden: false
+  ignore_pattern: regexp
