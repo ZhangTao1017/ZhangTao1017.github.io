@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html 
+	lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> npm的语义化版本 -  Hexo</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<!-- lazyload -->
+		<script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+		<!-- smooth-scrolling -->
+		<script src="https://unpkg.com/smooth-scrolling.js@latest"></script>
+		<!-- highlight -->
+		<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/atom-one-dark.min.css" />
+		<script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+		<!-- 预置 kiraicon -->
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		<link
+			rel="shortcut icon"
+			href="https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/116359b4ccf19917.jpg"
+			type="image/png"
+		/>
+	<meta name="generator" content="Hexo 5.4.2"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="Hexo">
+        <img
+			src="https://s2.loli.net/2022/12/02/D1UVqsf3rQhgZoM.jpg"
+			alt="Zhang Tao"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://s2.loli.net/2022/12/02/D1UVqsf3rQhgZoM.jpg" title="Zhang Tao">
+			<img
+				src="https://s2.loli.net/2022/12/02/D1UVqsf3rQhgZoM.jpg"
+				alt="Zhang Tao"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>2</div>
+		<div><span>标签</span>0</div>
+		<div><span>分类</span>0</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont icon-home"
+			></i>
+			<div class="kira-list-item-content">回到首页</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont icon-container"
+			></i>
+			<div class="kira-list-item-content">文章归档</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont icon-user"
+			></i>
+			<div class="kira-list-item-content">关于本人</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		 <div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		<a
+			class="mdui-ripple"
+			href="https://github.com/zhangtao101/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .15);
+			"
+		>
+			<i
+				class="kirafont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://gitee.com/zhangtao1996/"
+			target="_blank"
+			mdui-tooltip="{content: 'Gitee'}"
+			style="
+				color: rgb(165, 15, 15);
+				background-color: rgba(165, 15, 15, .15);
+			"
+		>
+			<i
+				class="kirafont icon-gitee"
+			></i> </a
+		>
+	</div>
+</div>
+    
+ 
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2022
+		<a href="/">Zhang Tao</a
+		>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<!-- TODO: github 链接 -->
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		都打到
+	</div>
+</div>
+<div class="kira-sidebar-modal" id="sidebar-modal" onclick="(function(self) {
+	self.classList.remove('show');
+	document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+})(this)"></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div
+			class="kira-post-cover"
+			style="padding-bottom: '56.25%'"
+		>
+			<img
+				data-src="https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg"
+				data-sizes="auto"
+				alt="npm的语义化版本"
+				class="lazyload  kira-post-cover-image"
+			/>
+			<h1>npm的语义化版本</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2022年12月12日</a>
+			<a><i class="kirafont icon-areachart"></i>1.1k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 5 分钟</a>
+		</div>
+		<h2 id="SemVer规范"><a href="#SemVer规范" class="headerlink" title="SemVer规范"></a>SemVer规范</h2><p>​    由 Gravatars 创办者兼 GitHub 共同创办者 Tom Preston-Werner 就建立了语义化版本控制的规范， <code>semantic version</code> 简称 <code>semver</code>, 于是这个规范就叫做 SemVer 规范，<a target="_blank" rel="noopener" href="https://semver.org/lang/zh-CN/">规范地址</a></p>
+<h3 id="版本号的格式"><a href="#版本号的格式" class="headerlink" title="版本号的格式"></a>版本号的格式</h3><p>​    标准的版本号必须采用X.Y.Z的格式,其中X,Y,Z为非负的整数,且禁止在数组前面补0.<strong>X是主版本号,Y是次版本号,Z是修订号, 英文表示为major, minor, patch, 每个元素必须以数值递增.</strong></p>
+<p>​    主版本号为0的软件处于开发初始阶段,一切都可能随时发生改变.</p>
+<p>​    1.0.0的版本号用于界定公共API的形成</p>
+<h3 id="版本号递增逻辑"><a href="#版本号递增逻辑" class="headerlink" title="版本号递增逻辑"></a>版本号递增逻辑</h3><p>​    修订号: 必须在只做了向下兼容的修正 <code>(针对不正确的结果而进行的内部修改)</code> 时才递增.</p>
+<p>​    次版本号:必须在有向下兼容的新功能出现时递增.在任何公共API的功能被标记为弃用时也必须递增.也可以在内部程序有大量新功能或改进被加入时递增,其中可以报考修订级别的改变.当次版本号改变时,修订号必须归零.</p>
+<p>​    主版本号: 必须在有任何不兼容的修改被加入公共API时递增.其中可以报考次版本号及修订号级别的改变.每当主版本号改变时,次版本号和修订号必须归零.</p>
+<h3 id="关于先行版本"><a href="#关于先行版本" class="headerlink" title="关于先行版本"></a>关于先行版本</h3><p>​    先行版本号可以被标注在修订版之后，先加上一个连接号再加上一连串以句点分隔的标识符来修饰。标识符必须由 ASCII 字母数字和连接号组成，且禁止留白。数字型的标识符禁止在前方补零，举个例子：1.0.0-alpha.6</p>
+<p>​    先行版的优先级低于相关联的标准版本，举个例子 1.0.0-alpha &lt; 1.0.0</p>
+<p>​    被标上先行版本号则表示这个版本并非稳定而且可能无法满足预期的兼容性需求</p>
+<h3 id="alpha-beta和rc"><a href="#alpha-beta和rc" class="headerlink" title="alpha,beta和rc"></a>alpha,beta和rc</h3><p>​    alpha: 内部测试版,主要给开发和测试找bug</p>
+<p>​    beta: 公开测试版,可以提前尝试一些新功能</p>
+<p>​    rc: Release Candidate(候选版本)的缩写, 表示该版本的功能不再增加,和最终发布版的功能一样,有点像预览版.可能再找一找小bug,就会到正式版.</p>
+<h2 id="NPM指定版本范围"><a href="#NPM指定版本范围" class="headerlink" title="NPM指定版本范围"></a>NPM指定版本范围</h2><p>​    在package.json文件中看到版本号前出现<code>~</code> <code>^</code>等字符,比如</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;depandencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;react&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^1.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;vue&quot;</span><span class="punctuation">:</span> <span class="string">&quot;~1.2.0&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>^</code> 表示次版本号的更新,比如<code>^1.2.0</code>表示安装的版本 <code>&gt;=1.2.0  &lt; 2.0.0</code></li>
+<li><code>~</code> 表示修订号的更新, 比如<code>~1.2.0</code>表示安装的版本 <code>&gt;=1.2.0 &lt; 1.3.0</code></li>
+</ul>
+<p>​    具体的逻辑:</p>
+<ul>
+<li><code>^</code> 只会执行不更改最左边非零数字的更新</li>
+</ul>
+<blockquote>
+<ol>
+<li><code>^0.2.3</code> 相当于 <code>&gt;=0.2.3 &lt; 0.3.0</code></li>
+<li><code>^0.0.3</code> 相当于 <code>&gt;=0.0.3 &lt;0.0.4</code></li>
+<li><code>^1.2.3</code> 相当于 <code>&gt;=1.2.3 &lt; 2.0.0</code></li>
+</ol>
+</blockquote>
+<ul>
+<li><code>~</code> 如果指定了次版本号,则只会进行修订版本号的更新,如果没有指定,则会进行此版本号的更新</li>
+</ul>
+<blockquote>
+<ol>
+<li><code>~1.2.3</code> 相当于 <code>&gt;=1.2.3 &lt; 1.3.0</code></li>
+<li><code>~1.2</code> 相当于 <code>&gt;=1.2.0 &lt;1.3.0</code></li>
+<li><code>~1</code> 相当于 <code>&gt;=1.0.0 &lt; 2.0.0</code></li>
+</ol>
+</blockquote>
+<h3 id="npm-version"><a href="#npm-version" class="headerlink" title="npm version"></a>npm version</h3><p>​    NPM提供了 <code>npm version</code> 命令更新版本号,具体语法如下:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version [&lt;newversion&gt; | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]</span><br></pre></td></tr></table></figure>
+
+<p>​    其中最主要的就是 <code>major</code>、<code>minor</code>、<code>patch</code>，比如项目的 <code>package.json</code> 的 <code>version</code> 为 <code>1.0.0</code>：</p>
+<ul>
+<li>执行 <code>npm version major</code> 后，version 会变成 <code>2.0.0</code></li>
+<li>执行 <code>npm version minor</code>后，version 会变成 <code>1.1.0</code></li>
+<li>执行 <code>npm version patch</code> 后，version 会变成 <code>1.0.1</code></li>
+</ul>
+<p>​    <code>premajor</code>、<code>preminor</code>、<code>prepatch</code> 也是同理：</p>
+<ul>
+<li>执行 <code>npm version premajor</code> 后，version 会变成 <code>2.0.0</code></li>
+<li>执行 <code>npm version preminor</code>后，version 会变成 <code>1.1.0</code></li>
+<li>执行 <code>npm version prepatch</code> 后，version 会变成 <code>1.0.1</code></li>
+</ul>
+<p>​    执行 <code>npm version prerelease</code>后，version 也会变成 <code>1.0.1-0</code>.</p>
+<p>​    <code>prerelease</code> 和 <code>prepatch</code>的区别在于,<code>prepatch</code> 是增加 <code>patch</code> 号，先行版本号置为 0，<code>prerelase</code> 则是如果没有先行版本号，则跟 prepatch 一样，如果有的话，则会在先行版本号上加 1，举个例子，当版本号为 <code>1.0.0-0</code>时</p>
+<p>​    执行 <code>npm version prepatch</code>后，version 会变成 <code>1.0.1-0</code></p>
+<p>​    而执行 <code>npm version prerelease</code>后，version 会变成 <code>1.0.0-1</code></p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>Zhang Tao<br>
+        <strong>本文链接：</strong><a href="https://zhangtao101.github.io/2022/12/12/npm%E7%9A%84%E8%AF%AD%E4%B9%89%E5%8C%96%E7%89%88%E6%9C%AC/" title="https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2022&#x2F;12&#x2F;12&#x2F;npm的语义化版本&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2022&#x2F;12&#x2F;12&#x2F;npm的语义化版本&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+		
+	</div>
+	
+	<div class="kira-post-footer">
+	<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css" />
+	<div id="gitalk"></div>
+	<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+	<script type="text/javascript">
+		var gitalk = new Gitalk({
+			clientID: '3b7361ecf15de9a56926',
+			clientSecret: '2a2d39213a19028114cab7970e7b6a6e01148b40',
+			id: 'npm的语义化版本',
+			repo: 'gitalk-comment',
+			owner: 'zhangtao101',
+			admin: 'zhangtao101',
+			title: '',
+		});
+		gitalk.render('gitalk');
+	</script>
+
+</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
