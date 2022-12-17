@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/layout.css">
 
 		
-		<title> 文件归档 -  Hexo</title>
+		<title> TypeScript学习 -  Hexo</title>
 		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
 		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
 		<!-- lazyload -->
@@ -77,7 +77,7 @@
 		</a>
 		
 		<a
-			class="kira-list-item mdui-ripple true"
+			class="kira-list-item mdui-ripple false"
 			href="/archive.html"
 			title="文章归档"
 		>
@@ -158,33 +158,117 @@
 			<div class="kira-content">
 				<div id="kira-top-header"></div>
 				<div class="kira-main-content">
-					<section class="kira-archives">
-    
-    <div class="tagcloud kira-rainbow">
-        <a class="mdui-ripple -unordered list-link" href="/tags/npm-version/" rel="tag">npm version<span class="mdui-ripple -unordered list-count">1</span></a><a class="mdui-ripple -unordered list-link" href="/tags/typescript/" rel="tag">typescript<span class="mdui-ripple -unordered list-count">1</span></a><a class="mdui-ripple -unordered list-link" href="/tags/vue3/" rel="tag">vue3<span class="mdui-ripple -unordered list-count">1</span></a>
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div
+			class="kira-post-cover"
+			style="padding-bottom: '56.25%'"
+		>
+			<img
+				data-src="https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg"
+				data-sizes="auto"
+				alt="TypeScript学习"
+				class="lazyload  kira-post-cover-image"
+			/>
+			<h1>TypeScript学习</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2022年12月17日</a>
+			<a><i class="kirafont icon-areachart"></i>0 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 1 分钟</a>
+		</div>
+		
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>Zhang Tao<br>
+        <strong>本文链接：</strong><a href="https://zhangtao101.github.io/2022/12/17/TypeScript%E5%AD%A6%E4%B9%A0(1)/" title="https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2022&#x2F;12&#x2F;17&#x2F;TypeScript学习(1)&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2022&#x2F;12&#x2F;17&#x2F;TypeScript学习(1)&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
     </div>
 
-    <div class="categories kira-rainbow-fill">
-        
-    </div>
-    
-    <article>
-        
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/typescript/" rel="tag">typescript</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+	<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css" />
+	<div id="gitalk"></div>
+	<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+	<script type="text/javascript">
+		var gitalk = new Gitalk({
+			clientID: '3b7361ecf15de9a56926',
+			clientSecret: '2a2d39213a19028114cab7970e7b6a6e01148b40',
+			id: 'TypeScript学习',
+			repo: 'gitalk-comment',
+			owner: 'zhangtao101',
+			admin: 'zhangtao101',
+			title: '评论',
+		});
+		gitalk.render('gitalk');
+	</script>
 
-        
-            <h2>2022</h2>
-            <ul>
-            
-                <li><span>12-17</span><a href="/2022/12/17/TypeScript%E5%AD%A6%E4%B9%A0(1)/" >TypeScript学习</a></li>
-            
-                <li><span>12-12</span><a href="/2022/12/12/npm%E7%9A%84%E8%AF%AD%E4%B9%89%E5%8C%96%E7%89%88%E6%9C%AC/" >npm的语义化版本</a></li>
-            
-                <li><span>12-02</span><a href="/2022/12/02/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" >vue学习笔记</a></li>
-            
-            </ul>
-        
-    </article>
-</section>
+</div>
+	
+</div>
+
 				</div>
 			</div>
 			<div class="kira-right-column">
