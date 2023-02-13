@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/layout.css">
 
 		
-		<title> TypeScript学习(1) -  Hexo</title>
+		<title> RXJS学习-FunctionProgramming通用函数 -  Hexo</title>
 		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
 		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
 		<!-- lazyload -->
@@ -204,51 +204,37 @@
 <div class="kira-post">
 	<article>
 		
-		<div class="kira-post-cover">
+		<div
+			class="kira-post-cover"
+			style="padding-bottom: '56.25%'"
+		>
 			<img
-				data-src="https://s2.loli.net/2022/12/17/uyFDt17kvXlJ54z.jpg"
+				data-src="https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg"
 				data-sizes="auto"
-				alt="TypeScript学习(1)"
+				alt="RXJS学习-FunctionProgramming通用函数"
 				class="lazyload  kira-post-cover-image"
 			/>
-			<h1>TypeScript学习(1)</h1>
+			<h1>RXJS学习-FunctionProgramming通用函数</h1>
 		</div>
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
-			<a><i class="kirafont icon-calendar-fill"></i>2022年12月17日</a>
-			<a><i class="kirafont icon-areachart"></i>407 字</a>
+			<a><i class="kirafont icon-calendar-fill"></i>2023年02月13日</a>
+			<a><i class="kirafont icon-areachart"></i>80 字</a>
 			<a><i class="kirafont icon-time-circle-fill"></i>大概 1 分钟</a>
 		</div>
-		<h2 id="TypeScript做了什么"><a href="#TypeScript做了什么" class="headerlink" title="TypeScript做了什么"></a>TypeScript做了什么</h2><ul>
-<li>静态类型检查<code>Static type-checking</code>: 在代码运行之前,预测语句运行的结果,并提示出可能会出错的地方.</li>
-<li>非异常失败<code>Non-exception</code>: 找出<code>合理</code>的错误,例如: <code>XXX不存在</code> <code>拼写错误</code> <code>方法返回值类型错误</code> <code>基本逻辑错误</code>….</li>
-<li>类型工具<code>Types for Tooling</code>: 在输入的时候提供补全和错误信息。还可以支持“快速修复”功能，即自动的修复错误，重构成组织清晰的代码。同时也支持导航功能，比如跳转到变量定义的地方，或者找到一个给定的变量所有的引用。</li>
-<li>显示类型<code>Explicit Types</code>: 定义方法及变量的类型</li>
-</ul>
-<h2 id="常见类型"><a href="#常见类型" class="headerlink" title="常见类型"></a>常见类型</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	KaTex--&gt; A(标记 Accents)</span><br><span class="line">	A--&gt;撇,估计,均值,向量等写于符号上下的标记</span><br><span class="line">	KaTex--&gt; 分隔符_Delimiters</span><br><span class="line">	分隔符_Delimiters--&gt;小中大括号,竖杠,绝对值等分隔符的反斜杠写法</span><br><span class="line">	KaTex--&gt; 公式组_Enviroments</span><br><span class="line">	公式组_Enviroments--&gt;B(.....)</span><br><span class="line">	KaTex--&gt;C(...)</span><br></pre></td></tr></table></figure>
+		<h2 id="ForEach"><a href="#ForEach" class="headerlink" title="ForEach"></a>ForEach</h2><p>​    原先可能要通过for循环取出数组中的每一个元素.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&#x27;Jerry&#x27;</span>, <span class="string">&#x27;Anna&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>​    现在可以通过数组的<code>forEach</code>方法取出每一个元素.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&#x27;Jerry&#x27;</span>, <span class="string">&#x27;Anna&#x27;</span>];</span><br><span class="line"></span><br><span class="line">arr.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(item));</span><br></pre></td></tr></table></figure>
 
-
-
-
-<h3 id="原始类型"><a href="#原始类型" class="headerlink" title="原始类型"></a>原始类型</h3><ul>
-<li><code>string</code> 表示字符串</li>
-<li><code>number</code> 表示数字,javaScript中没有<code>int</code>和<code>float</code>,所有的数字,类型都是<code>number</code></li>
-<li><code>boolean</code> 表示布尔值, <code>true</code> 或 <code>false</code></li>
-</ul>
-<blockquote>
-<p>类型名 <code>String</code>,<code>Number</code>,<code>Boolean</code>首字母大写也是合法的,当它们是一些非常少见的特殊内置类型.所以类型总是使用<code>string</code>, <code>number</code>, <code>boolean</code></p>
-</blockquote>
-<h3 id="数组-Array"><a href="#数组-Array" class="headerlink" title="数组(Array)"></a>数组(Array)</h3><p>​    声明一个类似于<code>[1, 2, 3]</code>的数组类型,需要用到语法<code>number[]</code>. 这个语法可以适用于任何类型(<code>string[]</code>表示一个字符串数组).</p>
-<h3 id="any"><a href="#any" class="headerlink" title="any"></a>any</h3><p>​    用来表示允许赋值为任意类型.</p>
-<p>​    </p>
-
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><h2 id="ConcatAll"><a href="#ConcatAll" class="headerlink" title="ConcatAll"></a>ConcatAll</h2>
 	</article>
 
 	 
     <div class="kira-post-copyright">
         <strong>本文作者：</strong>Zhang Tao<br>
-        <strong>本文链接：</strong><a href="https://zhangtao101.github.io/2022/12/17/TypeScript%E5%AD%A6%E4%B9%A0(1)/" title="https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2022&#x2F;12&#x2F;17&#x2F;TypeScript学习(1)&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2022&#x2F;12&#x2F;17&#x2F;TypeScript学习(1)&#x2F;</a><br>
+        <strong>本文链接：</strong><a href="https://zhangtao101.github.io/2023/02/13/FunctionProgramming%E9%80%9A%E7%94%A8%E5%87%BD%E6%95%B0/" title="https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2023&#x2F;02&#x2F;13&#x2F;FunctionProgramming通用函数&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2023&#x2F;02&#x2F;13&#x2F;FunctionProgramming通用函数&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -264,7 +250,7 @@
 	<div class="kira-post-meta kira-rainbow">
 		
 		
-			<a class="kirafont icon-tag-fill -none-link" href="/tags/typescript/" rel="tag">typescript</a>
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/rxjs/" rel="tag">rxjs</a>
 		
 	</div>
 	
@@ -276,7 +262,7 @@
 		var gitalk = new Gitalk({
 			clientID: '3b7361ecf15de9a56926',
 			clientSecret: '2a2d39213a19028114cab7970e7b6a6e01148b40',
-			id: 'TypeScript学习(1)',
+			id: 'RXJS学习-FunctionProgramming通用函数',
 			repo: 'gitalk-comment',
 			owner: 'zhangtao101',
 			admin: 'zhangtao101',
