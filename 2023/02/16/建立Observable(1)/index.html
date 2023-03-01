@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html 
+	lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> RXJS学习-建立Observable(1) -  Hexo</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<!-- lazyload -->
+		<script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+		<!-- smooth-scrolling -->
+		<script src="https://unpkg.com/smooth-scrolling.js@latest"></script>
+		<!-- highlight -->
+		<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/atom-one-dark.min.css" />
+		<script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+		<!-- 预置 kiraicon -->
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		<link
+			rel="shortcut icon"
+			href="https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/116359b4ccf19917.jpg"
+			type="image/png"
+		/>
+	<meta name="generator" content="Hexo 5.4.2"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="Hexo">
+        <img
+			src="https://s2.loli.net/2022/12/02/D1UVqsf3rQhgZoM.jpg"
+			alt="Zhang Tao"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://s2.loli.net/2022/12/02/D1UVqsf3rQhgZoM.jpg" title="Zhang Tao">
+			<img
+				src="https://s2.loli.net/2022/12/02/D1UVqsf3rQhgZoM.jpg"
+				alt="Zhang Tao"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>8</div>
+		<div><span>标签</span>4</div>
+		<div><span>分类</span>0</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont icon-home"
+			></i>
+			<div class="kira-list-item-content">回到首页</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont icon-container"
+			></i>
+			<div class="kira-list-item-content">文章归档</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont icon-user"
+			></i>
+			<div class="kira-list-item-content">关于本人</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		 <div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		<a
+			class="mdui-ripple"
+			href="https://github.com/zhangtao101/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .15);
+			"
+		>
+			<i
+				class="kirafont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://gitee.com/zhangtao1996/"
+			target="_blank"
+			mdui-tooltip="{content: 'Gitee'}"
+			style="
+				color: rgb(165, 15, 15);
+				background-color: rgba(165, 15, 15, .15);
+			"
+		>
+			<i
+				class="kirafont icon-gitee"
+			></i> </a
+		>
+	</div>
+</div>
+    
+<div class="kira-widget-wrap">
+	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/npm-version/" style="font-size: 10px;">npm version</a> <a href="/tags/rxjs/" style="font-size: 20px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a></div>
+	
+</div>
+
+ 
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2023
+		<a href="/">Zhang Tao</a
+		>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<!-- TODO: github 链接 -->
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		都打到
+	</div>
+</div>
+<div class="kira-sidebar-modal" id="sidebar-modal" onclick="(function(self) {
+	self.classList.remove('show');
+	document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+})(this)"></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div
+			class="kira-post-cover"
+			style="padding-bottom: '56.25%'"
+		>
+			<img
+				data-src="https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg"
+				data-sizes="auto"
+				alt="RXJS学习-建立Observable(1)"
+				class="lazyload  kira-post-cover-image"
+			/>
+			<h1>RXJS学习-建立Observable(1)</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2023年02月16日</a>
+			<a><i class="kirafont icon-areachart"></i>1.3k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 6 分钟</a>
+		</div>
+		<h2 id="RXJS的一个核心三个重点"><a href="#RXJS的一个核心三个重点" class="headerlink" title="RXJS的一个核心三个重点"></a>RXJS的一个核心三个重点</h2><p>​    一个核心是<code>Observable</code>再加上相关的<code>Operators</code>(<code>map</code>, <code>filter</code>…),这个部分是最重要的,其他三个重点基本也是围绕着这个核心在转.</p>
+<p>​    三个重点:</p>
+<ul>
+<li>Observer</li>
+<li>Subject</li>
+<li>Schedulers</li>
+</ul>
+<p>​    <code>Observer</code>是其中一定会用到但是是最简单的.</p>
+<p>​    <code>Subject</code>一般应用到的频率相对低很多,但如果想要看懂<code>RxJS</code>相关的<code>Library</code>或<code>Framework</code>, <code>Subject</code>就是一定要会的重点.</p>
+<p>​    <code>Schedulers</code></p>
+<h2 id="创建Observable"><a href="#创建Observable" class="headerlink" title="创建Observable"></a>创建Observable</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Observable</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;rxjs&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> observable = <span class="keyword">new</span> <span class="title class_">Observable</span>(<span class="function">(<span class="params">subscriber</span>) =&gt;</span> &#123;</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">1</span>);</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">2</span>);</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">3</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">observable.<span class="title function_">subscribe</span>(&#123;</span><br><span class="line">  <span class="title function_">next</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">error</span>(<span class="params">err</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">complete</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;complete&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>​    当订阅这个<code>Observable</code>时, 它会依次推送<code>1</code>,<code>2</code>,<code>3</code>等信息</p>
+<p>​    <code>RxJS</code>主要处理非同步请求, 但同时也能处理同步行为, 上面的代码就是同步执行的,例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Observable</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;rxjs&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> observable = <span class="keyword">new</span> <span class="title class_">Observable</span>(<span class="function">(<span class="params">subscriber</span>) =&gt;</span> &#123;</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">1</span>);</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">2</span>);</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">3</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;start&#x27;</span>);</span><br><span class="line">observable.<span class="title function_">subscribe</span>(&#123;</span><br><span class="line">  <span class="title function_">next</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">error</span>(<span class="params">err</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">complete</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;complete&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;end&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>​    会依次输出:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">start</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>​    而不是:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">start</span><br><span class="line">end</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>​    所以上面的代码是同步执行的, 非同步执行的代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Observable</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;rxjs&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> observable = <span class="keyword">new</span> <span class="title class_">Observable</span>(<span class="function">(<span class="params">subscriber</span>) =&gt;</span> &#123;</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">1</span>);</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">2</span>);</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">3</span>);</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    subscriber.<span class="title function_">next</span>(<span class="number">4</span>);</span><br><span class="line">  &#125;, <span class="number">500</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;start&#x27;</span>);</span><br><span class="line">observable.<span class="title function_">subscribe</span>(&#123;</span><br><span class="line">  <span class="title function_">next</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">error</span>(<span class="params">err</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">complete</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;complete&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;end&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>​    输出结果如下:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">start</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>​    从上面的例子可以看出: <strong><code>Observable</code>可以同时处理同步和非同步的行为</strong></p>
+<h2 id="观察者-Observer"><a href="#观察者-Observer" class="headerlink" title="观察者 Observer"></a>观察者 Observer</h2><p>​    <code>Observable</code>可以被订阅(<code>subscribe</code>),或者说可以被观察, 而订阅<code>Observable</code>的对象被称为<strong>观察者(<code>Observer</code>)</strong>.观察者是一个具有三个方法(<code>method</code>)的对象, 每当<code>Observable</code>发生事件时, 便会调用观察者对象中相对应的方法.</p>
+<blockquote>
+<p>这里的观察者(<code>Observer</code>)和观察者模式(<code>Observer Pattern</code>)无关, 观察者模式是一种设计模式,是思考问题的解决过程,而这里的观察者是一个被定义的对象.</p>
+</blockquote>
+<p>​    观察者的三个方法:</p>
+<ul>
+<li><code>next</code>: 每当<code>Observable</code>发送出新的值, <code>next</code>方法就会被呼叫</li>
+<li><code>complete</code>: 在<code>Observable</code>没有其他的数据可以获得时, <code>complete</code>方法就会被呼叫, 在<code>complete</code>被呼叫之后, <code>next</code>方法就不会再起作用.</li>
+<li><code>error</code>: 每当<code>Observable</code>内发生错误时, <code>error</code>方法就会被调用.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Observable</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;rxjs&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> observable = <span class="keyword">new</span> <span class="title class_">Observable</span>(<span class="function">(<span class="params">subscriber</span>) =&gt;</span> &#123;</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">1</span>);</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">2</span>);</span><br><span class="line">  subscriber.<span class="title function_">complete</span>();</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">3</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">observable.<span class="title function_">subscribe</span>(&#123;</span><br><span class="line">  <span class="title function_">next</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">error</span>(<span class="params">err</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">complete</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;complete&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>​    输出结果:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line">complete</span><br></pre></td></tr></table></figure>
+
+<p>​    可以看出在<code>complete</code>执行后, <code>next</code>就会自动失效, 所以没有打印出<code>3</code>.</p>
+<p>​    发生错误信息的例子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Observable</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;rxjs&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> observable = <span class="keyword">new</span> <span class="title class_">Observable</span>(<span class="function">(<span class="params">subscriber</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    subscriber.<span class="title function_">next</span>(<span class="number">1</span>);</span><br><span class="line">  	subscriber.<span class="title function_">next</span>(<span class="number">2</span>);</span><br><span class="line">      <span class="keyword">throw</span> <span class="string">&#x27;error&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    subscriber.<span class="title function_">error</span>(e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">observable.<span class="title function_">subscribe</span>(&#123;</span><br><span class="line">  <span class="title function_">next</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">error</span>(<span class="params">err</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">complete</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;complete&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>​    输出结果:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line">error</span><br></pre></td></tr></table></figure>
+
+<p>​    另外观察者可以是不完整的, 可以自由一个<code>next</code>方法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">observable.<span class="title function_">subscribe</span>(&#123;</span><br><span class="line">  <span class="title function_">next</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Observer</code>可能是一个无限的序列, 如<code>click</code>事件, 这时<code>complete</code>方法就有可能永远不会被调用.</p>
+</blockquote>
+<p>​    也可以吧<code>next</code>,<code>error</code>,<code>complete</code>三个方法依次传入<code>observable.subscribe</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">observable.<span class="title function_">subscribe</span>(</span><br><span class="line">    <span class="function"><span class="params">value</span> =&gt;</span> &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(value); &#125;,</span><br><span class="line">    <span class="function"><span class="params">error</span> =&gt;</span> &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Error: &#x27;</span>, error); &#125;,</span><br><span class="line">    <span class="function">() =&gt;</span> &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;complete&#x27;</span>) &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>​    <code>observable.subscribe</code>会在内部自动组成<code>observer</code>对象来操作.</p>
+<h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><p>​    <code>Observable</code>的订阅和<code>addEventListener</code>在实现上有很大的差异, 虽然他们的行为很像</p>
+<p>​    <code>addEventListener</code>本质上就是<code>Observer Pattern</code>的实现, 在内部会有一份订阅清单</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Producer</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">listeners</span> = [];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">addListener</span>(<span class="params">listener</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">typeof</span> listener === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">			<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">push</span>(listener)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;listener 必須是 function&#x27;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">removeListener</span>(<span class="params">listener</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">splice</span>(<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">indexOf</span>(listener), <span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">notify</span>(<span class="params">message</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">listener</span> =&gt;</span> &#123;</span><br><span class="line">			<span class="title function_">listener</span>(message);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    在内部保存了一份所有监听者的清单(<code>this.listeners</code>), 在要推送通知的时候会逐一对这份清单进行推送.</p>
+<p>​    但在<code>Observable</code>中不是这样实现的, 在其内部没有一份订阅者的清单. 订阅<code>Observable</code>的行为比较像是执行一个对象的方法, 并把数据传入这个方法中.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Observable</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;rxjs&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> observable = <span class="keyword">new</span> <span class="title class_">Observable</span>(<span class="function">(<span class="params">subscriber</span>) =&gt;</span> &#123;</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">1</span>);</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">2</span>);</span><br><span class="line">  subscriber.<span class="title function_">next</span>(<span class="number">3</span>);</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    subscriber.<span class="title function_">next</span>(<span class="number">4</span>);</span><br><span class="line">  &#125;, <span class="number">500</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">observable.<span class="title function_">subscribe</span>(&#123;</span><br><span class="line">  <span class="title function_">next</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">error</span>(<span class="params">err</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">complete</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;complete&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>​    上面代码的行为比较像这样:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">subscribe</span>(<span class="params">observer</span>) &#123;</span><br><span class="line">		observer.<span class="title function_">next</span>(<span class="string">&#x27;Jerry&#x27;</span>);</span><br><span class="line">		observer.<span class="title function_">next</span>(<span class="string">&#x27;Anna&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">subscribe</span>(&#123;</span><br><span class="line">	<span class="attr">next</span>: <span class="keyword">function</span>(<span class="params">value</span>) &#123;</span><br><span class="line">		<span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">error</span>: <span class="keyword">function</span>(<span class="params">error</span>) &#123;</span><br><span class="line">		<span class="variable language_">console</span>.<span class="title function_">log</span>(error)</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">complete</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">		<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;complete&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>​    这里可以看到<code>subscribe</code>是一个方法, 这个方法执行时会传入观察者, 而我们在这个方法内部去执行观察者的方法.</p>
+<p>​    <strong>订阅一个<code>Observable</code>就像是执行一个方法</strong></p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>Zhang Tao<br>
+        <strong>本文链接：</strong><a href="https://zhangtao101.github.io/2023/02/16/%E5%BB%BA%E7%AB%8BObservable(1)/" title="https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2023&#x2F;02&#x2F;16&#x2F;建立Observable(1)&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2023&#x2F;02&#x2F;16&#x2F;建立Observable(1)&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/rxjs/" rel="tag">rxjs</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+	<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css" />
+	<div id="gitalk"></div>
+	<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+	<script type="text/javascript">
+		var gitalk = new Gitalk({
+			clientID: '3b7361ecf15de9a56926',
+			clientSecret: '2a2d39213a19028114cab7970e7b6a6e01148b40',
+			id: 'RXJS学习-建立Observable(1)',
+			repo: 'gitalk-comment',
+			owner: 'zhangtao101',
+			admin: 'zhangtao101',
+			title: '评论',
+		});
+		gitalk.render('gitalk');
+	</script>
+
+</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>

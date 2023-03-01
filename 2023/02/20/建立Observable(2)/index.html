@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/layout.css">
 
 		
-		<title> RXJS学习-FunctionProgramming通用函数 -  Hexo</title>
+		<title> RXJS学习-建立Observable(2) -  Hexo</title>
 		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
 		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
 		<!-- lazyload -->
@@ -59,7 +59,7 @@
 		</a>
 	</div>
 	<div class="kira-count">
-		<div><span>文章</span>6</div>
+		<div><span>文章</span>8</div>
 		<div><span>标签</span>4</div>
 		<div><span>分类</span>0</div>
 	</div>
@@ -211,30 +211,36 @@
 			<img
 				data-src="https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg"
 				data-sizes="auto"
-				alt="RXJS学习-FunctionProgramming通用函数"
+				alt="RXJS学习-建立Observable(2)"
 				class="lazyload  kira-post-cover-image"
 			/>
-			<h1>RXJS学习-FunctionProgramming通用函数</h1>
+			<h1>RXJS学习-建立Observable(2)</h1>
 		</div>
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
-			<a><i class="kirafont icon-calendar-fill"></i>2023年02月13日</a>
-			<a><i class="kirafont icon-areachart"></i>80 字</a>
+			<a><i class="kirafont icon-calendar-fill"></i>2023年02月20日</a>
+			<a><i class="kirafont icon-areachart"></i>26 字</a>
 			<a><i class="kirafont icon-time-circle-fill"></i>大概 1 分钟</a>
 		</div>
-		<h2 id="ForEach"><a href="#ForEach" class="headerlink" title="ForEach"></a>ForEach</h2><p>​    原先可能要通过for循环取出数组中的每一个元素.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&#x27;Jerry&#x27;</span>, <span class="string">&#x27;Anna&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+		<h2 id="Creation-Operator"><a href="#Creation-Operator" class="headerlink" title="Creation Operator"></a>Creation Operator</h2><p>​    <code>Observable</code>有许多创建实例的方法, 称为<code>creation operator</code>:</p>
+<ul>
+<li>of</li>
+<li>from</li>
+<li>fromEvent</li>
+<li>fromPromise</li>
+<li>never</li>
+<li>empty</li>
+<li>throw</li>
+<li>interval</li>
+<li>timer</li>
+</ul>
 
-<p>​    现在可以通过数组的<code>forEach</code>方法取出每一个元素.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&#x27;Jerry&#x27;</span>, <span class="string">&#x27;Anna&#x27;</span>];</span><br><span class="line"></span><br><span class="line">arr.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(item));</span><br></pre></td></tr></table></figure>
-
-<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><h2 id="ConcatAll"><a href="#ConcatAll" class="headerlink" title="ConcatAll"></a>ConcatAll</h2>
 	</article>
 
 	 
     <div class="kira-post-copyright">
         <strong>本文作者：</strong>Zhang Tao<br>
-        <strong>本文链接：</strong><a href="https://zhangtao101.github.io/2023/02/13/FunctionProgramming%E9%80%9A%E7%94%A8%E5%87%BD%E6%95%B0/" title="https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2023&#x2F;02&#x2F;13&#x2F;FunctionProgramming通用函数&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2023&#x2F;02&#x2F;13&#x2F;FunctionProgramming通用函数&#x2F;</a><br>
+        <strong>本文链接：</strong><a href="https://zhangtao101.github.io/2023/02/20/%E5%BB%BA%E7%AB%8BObservable(2)/" title="https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2023&#x2F;02&#x2F;20&#x2F;建立Observable(2)&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2023&#x2F;02&#x2F;20&#x2F;建立Observable(2)&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -262,7 +268,7 @@
 		var gitalk = new Gitalk({
 			clientID: '3b7361ecf15de9a56926',
 			clientSecret: '2a2d39213a19028114cab7970e7b6a6e01148b40',
-			id: 'RXJS学习-FunctionProgramming通用函数',
+			id: 'RXJS学习-建立Observable(2)',
 			repo: 'gitalk-comment',
 			owner: 'zhangtao101',
 			admin: 'zhangtao101',

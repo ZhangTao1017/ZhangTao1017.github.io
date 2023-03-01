@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html 
+	lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> RXJS学习-什么是Ovservable -  Hexo</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<!-- lazyload -->
+		<script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+		<!-- smooth-scrolling -->
+		<script src="https://unpkg.com/smooth-scrolling.js@latest"></script>
+		<!-- highlight -->
+		<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/atom-one-dark.min.css" />
+		<script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+		<!-- 预置 kiraicon -->
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		<link
+			rel="shortcut icon"
+			href="https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/116359b4ccf19917.jpg"
+			type="image/png"
+		/>
+	<meta name="generator" content="Hexo 5.4.2"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="Hexo">
+        <img
+			src="https://s2.loli.net/2022/12/02/D1UVqsf3rQhgZoM.jpg"
+			alt="Zhang Tao"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://s2.loli.net/2022/12/02/D1UVqsf3rQhgZoM.jpg" title="Zhang Tao">
+			<img
+				src="https://s2.loli.net/2022/12/02/D1UVqsf3rQhgZoM.jpg"
+				alt="Zhang Tao"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>8</div>
+		<div><span>标签</span>4</div>
+		<div><span>分类</span>0</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont icon-home"
+			></i>
+			<div class="kira-list-item-content">回到首页</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont icon-container"
+			></i>
+			<div class="kira-list-item-content">文章归档</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont icon-user"
+			></i>
+			<div class="kira-list-item-content">关于本人</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		 <div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		<a
+			class="mdui-ripple"
+			href="https://github.com/zhangtao101/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .15);
+			"
+		>
+			<i
+				class="kirafont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://gitee.com/zhangtao1996/"
+			target="_blank"
+			mdui-tooltip="{content: 'Gitee'}"
+			style="
+				color: rgb(165, 15, 15);
+				background-color: rgba(165, 15, 15, .15);
+			"
+		>
+			<i
+				class="kirafont icon-gitee"
+			></i> </a
+		>
+	</div>
+</div>
+    
+<div class="kira-widget-wrap">
+	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/npm-version/" style="font-size: 10px;">npm version</a> <a href="/tags/rxjs/" style="font-size: 20px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a></div>
+	
+</div>
+
+ 
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2023
+		<a href="/">Zhang Tao</a
+		>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<!-- TODO: github 链接 -->
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+		都打到
+	</div>
+</div>
+<div class="kira-sidebar-modal" id="sidebar-modal" onclick="(function(self) {
+	self.classList.remove('show');
+	document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+})(this)"></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div
+			class="kira-post-cover"
+			style="padding-bottom: '56.25%'"
+		>
+			<img
+				data-src="https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg"
+				data-sizes="auto"
+				alt="RXJS学习-什么是Ovservable"
+				class="lazyload  kira-post-cover-image"
+			/>
+			<h1>RXJS学习-什么是Ovservable</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2023年02月15日</a>
+			<a><i class="kirafont icon-areachart"></i>1.4k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 6 分钟</a>
+		</div>
+		<p>​    理解Observable之前, 必须先了解两个设计模式, <code>lterator Pattern</code> 和 <code>Observer Pattern</code></p>
+<h2 id="Observer-Pattern"><a href="#Observer-Pattern" class="headerlink" title="Observer Pattern"></a>Observer Pattern</h2><p>​    <code>Observer Pattern</code> 其实很常见, 在许多API的设计上都用了<code>Observer Pattern</code>的设计, 最简单的例子就是DOM元素的事件监听:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">clickHandler</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">addEventListeneer</span>(<span class="string">&#x27;click&#x27;</span>, clickHandler);</span><br></pre></td></tr></table></figure>
+
+<p>​    上面的代码定义了一个<code>clickHandler</code>方法, 在用DOM元素的<code>addEventListener</code>来监听点击事件, 每次在用户点击body的时候都会执行一次<code>clickHandler</code>方法, 并把相同的信息(<code>event</code>)传递过来. 这就是观察者模式, 可以对某件事注册监听,并在事件发生时自动执行注册的监听者(<code>listener</code>)</p>
+<blockquote>
+<p>ES5示例</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Producer</span>(<span class="params"></span>) &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 防止当做方法调用来使用</span></span><br><span class="line">	<span class="keyword">if</span>(!(<span class="variable language_">this</span> <span class="keyword">instanceof</span> <span class="title class_">Producer</span>)) &#123;</span><br><span class="line">	  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;請用 new Producer()!&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">listeners</span> = [];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 加入监听的方法</span></span><br><span class="line"><span class="title class_">Producer</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">addListener</span> = <span class="keyword">function</span>(<span class="params">listener</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">typeof</span> listener === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">push</span>(listener)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;listener 必須是 function&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 移除监听的方法</span></span><br><span class="line"><span class="title class_">Producer</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">removeListener</span> = <span class="keyword">function</span>(<span class="params">listener</span>) &#123;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">splice</span>(<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">indexOf</span>(listener), <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 发送通知的方法</span></span><br><span class="line"><span class="title class_">Producer</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">notify</span> = <span class="keyword">function</span>(<span class="params">message</span>) &#123;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">listener</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="title function_">listener</span>(message);</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ES6示例</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Producer</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">listeners</span> = [];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">addListener</span>(<span class="params">listener</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">typeof</span> listener === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">			<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">push</span>(listener)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;listener 必須是 function&#x27;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">removeListener</span>(<span class="params">listener</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">splice</span>(<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">indexOf</span>(listener), <span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">notify</span>(<span class="params">message</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">listeners</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">listener</span> =&gt;</span> &#123;</span><br><span class="line">			<span class="title function_">listener</span>(message);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    创建对象的实例:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// new 出一個 Producer 实例叫 egghead</span></span><br><span class="line"><span class="keyword">var</span> egghead = <span class="keyword">new</span> <span class="title class_">Producer</span>(); </span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">listener1</span>(<span class="params">message</span>) &#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(message + <span class="string">&#x27;from listener1&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">listener2</span>(<span class="params">message</span>) &#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(message + <span class="string">&#x27;from listener2&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">egghead.<span class="title function_">addListener</span>(listener1); <span class="comment">// 注册监听</span></span><br><span class="line">egghead.<span class="title function_">addListener</span>(listener2);</span><br><span class="line">egghead.<span class="title function_">notify</span>(<span class="string">&#x27;A new course!!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​    打印结果:</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a new course!! from listener1</span><br><span class="line">a new course!! from listener2</span><br></pre></td></tr></table></figure>
+
+<p>​    每当<code>notify</code>方法被执行一次, <code>listener1</code> 和 <code>listener2</code> 都会被通知到,这些<code>listener</code>可以额外被添加,也可以被移除.</p>
+<p>​    这很好的说明了<code>Observer Pattern</code> 如何在事件(<code>event</code>)和监听者(<code>listener</code>)的互动中做到去耦合(<code>decoupling</code>);</p>
+<h2 id="Iterator-Pattern"><a href="#Iterator-Pattern" class="headerlink" title="Iterator Pattern"></a>Iterator Pattern</h2><p>​    原生JS建立Iterator</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> iterator = arr[<span class="title class_">Symbol</span>.<span class="property">iterator</span>]();</span><br><span class="line"></span><br><span class="line">iterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: 1, done: false &#125;</span></span><br><span class="line">iterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: 2, done: false &#125;</span></span><br><span class="line">iterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: 3, done: false &#125;</span></span><br><span class="line">iterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>JavaScript</code>到了<code>ES6</code>才有原生的<code>Iterator</code></p>
+</blockquote>
+<blockquote>
+<p>在<code>ECMAScript</code>中<code>Iterator</code>最早采用的是类似<code>Python</code>的<code>Iterator</code>规范, 就是在<code>Iterator</code>没有元素之后,执行<code>next</code>后直接抛出错误; 但后来经过一段时间讨论后,决定采用<code>Functional</code>的做法, 改成在取得最后一个元素之后执行<code>next</code>永远都返回<code>&#123; value: undefined, done: true &#125;</code></p>
+</blockquote>
+<p>​    <code>JavaScript</code>的<code>Iterator</code>只有一个<code>next()</code>方法, 这个方法只会返回两种结果:</p>
+<ol>
+<li>在最后一个元素前: <code>&#123; done: false, value: elem &#125;</code></li>
+<li>在最后一个元素后: <code>&#123; done: true, value: undefined &#125;</code></li>
+</ol>
+<p>​    ES5中实现简单的<code>Iterator Pattern</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">IteratorFromArray</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span>(!(<span class="variable language_">this</span> <span class="keyword">instanceof</span> <span class="title class_">IteratorFromArray</span>)) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;請用 new IteratorFromArray()!&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">_array</span> = arr;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">_cursor</span> = <span class="number">0</span>;	</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">IteratorFromArray</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">next</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_cursor</span> &lt; <span class="variable language_">this</span>.<span class="property">_array</span>.<span class="property">length</span> ?</span><br><span class="line">		&#123; <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">_array</span>[<span class="variable language_">this</span>.<span class="property">_cursor</span>++], <span class="attr">done</span>: <span class="literal">false</span> &#125; :</span><br><span class="line">		&#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    ES6版本的代码:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">IteratorFromArray</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">_array</span> = arr;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">_cursor</span> = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_cursor</span> &lt; <span class="variable language_">this</span>.<span class="property">_array</span>.<span class="property">length</span> ?</span><br><span class="line">		&#123; <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">_array</span>[<span class="variable language_">this</span>.<span class="property">_cursor</span>++], <span class="attr">done</span>: <span class="literal">false</span> &#125; :</span><br><span class="line">		&#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    <code>Iterator Pattern</code>虽然很单纯,但同时带来了两个优势:</p>
+<pre><code>1. 它渐进式取得数据的特性可以拿来做延迟运算(`Lazy evaluation`), 让我们能用它来处理大数据结构.
+1. 因为`Iterator`本身就是序列, 所以可以实现所有数组的运算符号像 `map`, `filter`...等.
+</code></pre>
+<p>​    ES6简单实现map:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">IteratorFromArray</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">_array</span> = arr;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">_cursor</span> = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_cursor</span> &lt; <span class="variable language_">this</span>.<span class="property">_array</span>.<span class="property">length</span> ?</span><br><span class="line">		&#123; <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">_array</span>[<span class="variable language_">this</span>.<span class="property">_cursor</span>++], <span class="attr">done</span>: <span class="literal">false</span> &#125; :</span><br><span class="line">		&#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="title function_">map</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">		<span class="keyword">const</span> iterator = <span class="keyword">new</span> <span class="title class_">IteratorFromArray</span>(<span class="variable language_">this</span>.<span class="property">_array</span>);</span><br><span class="line">		<span class="keyword">return</span> &#123;</span><br><span class="line">			<span class="attr">next</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">				<span class="keyword">const</span> &#123; done, value &#125; = iterator.<span class="title function_">next</span>();</span><br><span class="line">				<span class="keyword">return</span> &#123;</span><br><span class="line">					<span class="attr">done</span>: done,</span><br><span class="line">					<span class="attr">value</span>: done ? <span class="literal">undefined</span> : <span class="title function_">callback</span>(value)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> iterator = <span class="keyword">new</span> <span class="title class_">IteratorFromArray</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]);</span><br><span class="line"><span class="keyword">var</span> newIterator = iterator.<span class="title function_">map</span>(<span class="function"><span class="params">value</span> =&gt;</span> value + <span class="number">3</span>);</span><br><span class="line">newIterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: 4, done: false &#125;</span></span><br><span class="line">newIterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: 5, done: false &#125;</span></span><br><span class="line">newIterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: 6, done: false &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="惰性计算-Lazy-evaluation"><a href="#惰性计算-Lazy-evaluation" class="headerlink" title="惰性计算(Lazy evaluation)"></a>惰性计算(Lazy evaluation)</h3><p>​    是一种运算策略(<code>evaluation strategy</code>), 简单来说就是延迟一个表达式的计算时间直到真正需要它的值的时候在做运算.</p>
+<p>​    使用<code>generator function</code>的例子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">getNumbers</span>(<span class="params">words</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> word <span class="keyword">of</span> words) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="regexp">/^[0-9]+$/</span>.<span class="title function_">test</span>(word)) &#123;</span><br><span class="line">            <span class="keyword">yield</span> <span class="built_in">parseInt</span>(word, <span class="number">10</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> iterator = <span class="title function_">getNumbers</span>(<span class="string">&#x27;30 XXXXX (04)&#x27;</span>);</span><br><span class="line"></span><br><span class="line">iterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: 3, done: false &#125;</span></span><br><span class="line">iterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: 0, done: false &#125;</span></span><br><span class="line">iterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: 0, done: false &#125;</span></span><br><span class="line">iterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: 4, done: false &#125;</span></span><br><span class="line">iterator.<span class="title function_">next</span>();</span><br><span class="line"><span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>​    这里写了 一个方法用来获取字符串中的数字, 在这个方法里用来for…of的方式来获取每个字符并用正则表达式来判断时候是数字, 如果是就转成数值并回传.当把一个字符串丢到<code>getNumbers</code>方法时,并没有马上运算出字符串中的所有数字,必须等到执行<code>next</code>方法的时候,才会真的做运算, 这就是所谓的延迟运算(<code>evaluation strategy</code>).</p>
+<h2 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h2><p>​    在了解<code>Observer</code>和 <code>Iterator</code>后, 发现其实<code>Observer</code>和<code>Iterator</code>有个共同的特性, 就是他们都是渐进式(<code>progressive</code>)的获取数据,差别在于<code>Observer</code>是生产者(<code>Producer</code>)推送资料(<code>push</code>), 而<code>Iterator</code>是消费者(<code>Consumer</code>)要求数据(<code>pull</code>).</p>
+<p>​    <code>Observable</code>就是这两个<code>Pattern </code>思想的结合, <code>Observable</code>具备生产者推送数据的特性,同时能像序列,拥有序列处理数据的方法(<code>map</code>, <code>filter</code>…).</p>
+<p>​    简单来说, <code>Observable</code>就像是一个序列,里面的元素会随着时间推送.</p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>Zhang Tao<br>
+        <strong>本文链接：</strong><a href="https://zhangtao101.github.io/2023/02/15/%E4%BB%80%E4%B9%88%E6%98%AFOvservable/" title="https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2023&#x2F;02&#x2F;15&#x2F;什么是Ovservable&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;zhangtao101.github.io&#x2F;2023&#x2F;02&#x2F;15&#x2F;什么是Ovservable&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/rxjs/" rel="tag">rxjs</a>
+		
+	</div>
+	
+	<div class="kira-post-footer">
+	<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css" />
+	<div id="gitalk"></div>
+	<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+	<script type="text/javascript">
+		var gitalk = new Gitalk({
+			clientID: '3b7361ecf15de9a56926',
+			clientSecret: '2a2d39213a19028114cab7970e7b6a6e01148b40',
+			id: 'RXJS学习-什么是Ovservable',
+			repo: 'gitalk-comment',
+			owner: 'zhangtao101',
+			admin: 'zhangtao101',
+			title: '评论',
+		});
+		gitalk.render('gitalk');
+	</script>
+
+</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
