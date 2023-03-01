@@ -31,7 +31,7 @@
 	<body>
 		<div
 			class="kira-background"
-			style="background-image: url('https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg')"
+			style="background-image: url('https://s2.loli.net/2023/03/01/RSLWTCFOHlZpg2V.jpg')"
 		></div>
 		<div class="kira-header">
     <a
@@ -209,7 +209,7 @@
 			style="padding-bottom: '56.25%'"
 		>
 			<img
-				data-src="https://raw.githubusercontent.com/ch1ny/PictureCDN/master/others/f0d5cc34c6e5aa7.jpg"
+				data-src="https://s2.loli.net/2023/03/01/RSLWTCFOHlZpg2V.jpg"
 				data-sizes="auto"
 				alt="RXJS学习"
 				class="lazyload  kira-post-cover-image"
@@ -258,7 +258,7 @@
 <p>​    上面列的API都是非同步的,但他们都有各自的API及写法.如果使用RxJS,上面所有的API都可以通过RxJS来处理,就能使用相同的API操作(RxJS的API)</p>
 <p>​    例子,监听点击事件,但点击一次后不在监听:</p>
 <p>原生的JavaScript:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">handler</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">	<span class="title function_">alert</span>(<span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">	<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#test&#x27;</span>).<span class="title function_">removeEventListener</span>(<span class="string">&#x27;click&#x27;</span>, handler); <span class="comment">// 結束監聽</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 註冊監聽</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#test&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, handler);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">handler</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">	<span class="title function_">alert</span>(<span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">    <span class="comment">// 结束监听</span></span><br><span class="line">	<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#test&#x27;</span>).<span class="title function_">removeEventListener</span>(<span class="string">&#x27;click&#x27;</span>, handler);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册监听</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#test&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, handler);</span><br></pre></td></tr></table></figure>
 
 <p>使用RxJS:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; fromEvent, take &#125; <span class="keyword">from</span> <span class="string">&quot;https://cdn.skypack.dev/rxjs@7.8.0&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title function_">fromEvent</span>(</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#test&#x27;</span>),</span><br><span class="line">  <span class="string">&#x27;click&#x27;</span></span><br><span class="line">).<span class="title function_">pipe</span>(</span><br><span class="line">  <span class="title function_">take</span>(<span class="number">1</span>)</span><br><span class="line">).<span class="title function_">subscribe</span>(</span><br><span class="line">   <span class="function">() =&gt;</span> <span class="title function_">alert</span>(<span class="string">&#x27;click&#x27;</span>)</span><br><span class="line"> );</span><br></pre></td></tr></table></figure>
